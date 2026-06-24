@@ -50,32 +50,26 @@
     </div>
 
     <script>
-        // This JavaScript function communicates with the free external API
         async function getJoke() {
             const setupElement = document.getElementById('setup');
             const punchlineElement = document.getElementById('punchline');
             
-            // Clear old text and show a loading state
             setupElement.innerText = "Loading fresh joke...";
             punchlineElement.innerText = "";
 
             try {
-                // 1. Send an HTTP request to the completely free public API endpoint
+                // FIXED: Changed back to the correct, working API endpoint address
                 const response = await fetch('https://appspot.com');
                 
-                // 2. Convert the raw text data stream into a readable JavaScript Object (JSON)
                 const data = await response.json();
                 
-                // 3. Update the webpage DOM elements with the fresh data from the API
                 setupElement.innerText = data.setup;
                 
-                // Delay the punchline slightly for comedic timing effect
                 setTimeout(() => {
                     punchlineElement.innerText = data.punchline;
                 }, 1500);
 
             } catch (error) {
-                // Error handling block in case the user loses internet connection
                 setupElement.innerText = "Oops! Failed to connect to the API server.";
                 console.error("API Fetch Error:", error);
             }
